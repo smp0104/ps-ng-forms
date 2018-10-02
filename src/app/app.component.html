@@ -8,35 +8,45 @@
 </div>
 <div>
 <form #form="ngForm" novalidate>
-  <div class="form-group">
+  <div class="form-group" [class.has-error]="firstName.invalid && firstName.dirty">
     <label>First Name</label>
-     <input class="form-control" type="text" name="test" placeholder="Enter Name" ngModel required>
+     <input required class="form-control" pattern="...+" #firstName="ngModel" type="text" name="firstName" placeholder="Enter First Name" [(ngModel)]='model.firstName'>
+    <div class="alert alert-danger" *ngIf="firstName.invalid && firstName.dirty">
+      First Name, minimum of 3 characters required
+    </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" [class.has-error]="secondName.invalid && secondName.dirty">
     <label>Last Name</label>
-     <input class="form-control" type="text" name="test" placeholder="Enter Name" ngModel required>
+     <input required class="form-control" pattern="...+" #secondName="ngModel" type="text" name="lastName" placeholder="Enter Last Name" [(ngModel)]='model.lastName'>
+    <div class="alert alert-danger" *ngIf="secondName.invalid && secondName.dirty">
+      Last Name, minimum of 3 characters required
+    </div>
   </div>
 
   <div class="checkbox">
     <label>
-      <input type="checkbox" name="fte" ngModel > FTE
+      <input type="checkbox" name="isFte" [(ngModel)]='model.isFte' > FTE
     </label>
   </div>
   <label>Payment Type</label>
 
   <div class="radio">
     <label>
-      <input type="radio" name="payType" value="Ch" ngModel checked> Cheque
+      <input type="radio" name="paymentType" value="Ch" [(ngModel)]='model.paymentType' checked> Cheque
     </label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" name="payType" value="OL" ngModel> Online
+      <input type="radio" name="paymentType" value="OL" [(ngModel)]='model.paymentType'> Online
     </label>
   </div>
-  <div class="form-group">
+  <div class="form-group" [class.has-error]="hasDefaultValue">
     <Label>Preffered Language</Label>
-    <select class="form-control">
+    <select class="form-control" #language="ngModel" name="language"
+    (blur)= verifyLanguagevalue(language.value);
+    (change)=verifyLanguagevalue(language.value);
+    [(ngModel)]='model.language'>
+      <option value="default">Select Language</option>
       <option *ngFor="let lang of languages">{{lang}}</option>
     </select>
   </div>
@@ -45,9 +55,10 @@
    <input type="date" name="hiredDate" class="form-control" ngModel>
   </div>
   <div>
-    <button class="btn btn-primary" type="submit">Go</button>
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Go</button>
    </div>
 </form>
+{{form.valid}}
 </div>
 </div>
 

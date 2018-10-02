@@ -1,5 +1,5 @@
+import { EmpolyeeDetails } from './models/employee.model';
 import { Component } from '@angular/core';
-import {FormsModule} from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,4 +8,14 @@ import {FormsModule} from '@angular/forms';
 export class AppComponent {
   title = 'NG Forms';
   languages = ['English', 'Other'];
+ model = new EmpolyeeDetails('Mani', 'SMP', true, 'Ch', 'default');
+ hasDefaultValue = false;
+
+verifyLanguagevalue(value) {
+  if (value === 'default') {
+    this.hasDefaultValue = true;
+  } else {
+    this.hasDefaultValue = false;
+  }
+}
 }
