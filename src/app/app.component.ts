@@ -1,3 +1,4 @@
+import { FormPosterService } from './services/form-poster.service';
 import { EmpolyeeDetails } from './models/employee.model';
 import { Component } from '@angular/core';
 @Component({
@@ -10,7 +11,7 @@ export class AppComponent {
   languages = ['English', 'Other'];
  model = new EmpolyeeDetails('Mani', 'SMP', true, 'Ch', 'default');
  hasDefaultValue = false;
-
+constructor(private formPoster: FormPosterService) {}
 verifyLanguagevalue(value) {
   if (value === 'default') {
     this.hasDefaultValue = true;
