@@ -7,7 +7,7 @@
   </h1>
 </div>
 <div>
-<form #form="ngForm" novalidate>
+<form #form="ngForm" (submit)="submitForm(form)" novalidate>
   <div class="form-group" [class.has-error]="firstName.invalid && firstName.dirty">
     <label>First Name</label>
      <input required class="form-control" pattern="...+" #firstName="ngModel" type="text" name="firstName" placeholder="Enter First Name" [(ngModel)]='model.firstName'>
